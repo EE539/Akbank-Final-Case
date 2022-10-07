@@ -12,7 +12,7 @@ contract CharacterOutfit{
     event Launch(uint id, address indexed creator,  string outfitName, string redeemLink, uint raretiy, uint payment); 
     event Buy(uint indexed id, address indexed caller, uint amount);
 
-    mapping(address => string) public boughtOutfits;
+    mapping(address => string) public boughtOutfits; //Buyers can see what outfit they bought
 
     struct Outfit{
         uint id; //ID of the outfit
@@ -28,7 +28,7 @@ contract CharacterOutfit{
         owner = msg.sender;
     }
 
-    modifier onlyOwner {
+    modifier onlyOwner { //To check if the address is owner of the outfits or not
       require(msg.sender == owner, "You are not the owner");
       _; 
     }
@@ -52,7 +52,6 @@ contract CharacterOutfit{
 
         require(_money == outfit.payment, "Wrong amount sended");
 
-        //token.transfer(outfit.creator, outfit.payment);
         emit Buy(_id, msg.sender, _money);
         boughtOutfits[msg.sender] = string.concat("Outfit Name: ", outfit.outfitName, " | Outfit Redeem Link: ", outfit.redeemLink, " || ");
         return string (outfit.redeemLink);
