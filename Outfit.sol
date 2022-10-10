@@ -53,7 +53,7 @@ contract CharacterOutfit{
         require(_money == outfit.payment, "Wrong amount sended");
 
         emit Buy(_id, msg.sender, _money);
-        boughtOutfits[msg.sender] = string.concat("Outfit Name: ", outfit.outfitName, " | Outfit Redeem Link: ", outfit.redeemLink, " || ");
+        boughtOutfits[msg.sender] = string.concat("Outfit Name: ", outfit.outfitName, " | Outfit Redeem Link: ", outfit.redeemLink, " || ", boughtOutfits[msg.sender]);
         return string (outfit.redeemLink);
     } //The function let users the buy the outfit
 
